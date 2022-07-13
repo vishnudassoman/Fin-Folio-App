@@ -2,8 +2,8 @@
 {
     public class PortFolio : BaseEntity
     {
-        public int UserId { get; set; }
+        public int UserID { get; set; }
         public string Name { get; set; }
-        public List<PortFolioItem> Items { get; set; }
+        public ICollection<PortFolioItem> Items { get; set; }
     }
 }

@@ -9,9 +9,10 @@ namespace FinFolio.ClientRepository.Configuration
         public void Configure(EntityTypeBuilder<PortFolio> builder)
         {
             builder.HasKey(prop => prop.Id);
-            builder.Property(prop => prop.UserId)
+            builder.Property(prop => prop.UserID)
                 .IsRequired();
             builder.Property(prop => prop.Name)
+                .HasColumnType("varchar(225)")
                 .HasMaxLength(225)
                 .IsRequired()
                 .IsUnicode();
