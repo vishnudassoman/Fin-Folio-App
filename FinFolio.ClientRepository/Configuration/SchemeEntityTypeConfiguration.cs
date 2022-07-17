@@ -1,0 +1,36 @@
+﻿using FinFolio.ClientRepository.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace FinFolio.ClientRepository.Configuration
+{
+    public class SchemeEntityTypeConfiguration : IEntityTypeConfiguration<Scheme>
+    {
+        public void Configure(EntityTypeBuilder<Scheme> builder)
+        {
+            builder.HasKey(prop => prop.Id);
+            builder.Property(prop => prop.Code)
+                .HasColumnType("int")
+                .IsRequired();
+            builder.Property(prop => prop.NAVName)
+                .HasColumnType("varchar(255)")
+                .HasMaxLength(255)
+                .IsRequired();
+            builder.Property(prop => prop.LaunchDate)
+                .HasColumnType("datetime")
+                .IsRequired();
+            builder.Property(prop => prop.IsActive)
+                .HasColumnType("bit")
+                .IsRequired()
+                .HasDefaultValue(true);
+            builder.HasMany(prop => prop.PortFolioItems)
+                .WithOne(p => p.Scheme)
+                .OnDelete(DeleteBehavior.Cascade)
+                .IsRequired(false);
+            builder.HasMany(prop => prop.Wishlist)
+               .WithOne(p => p.Scheme)
+               .OnDelete(DeleteBehavior.Cascade)
+               .IsRequired(false);
+        }
+    }
+}

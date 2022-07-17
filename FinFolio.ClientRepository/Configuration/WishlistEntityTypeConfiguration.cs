@@ -11,15 +11,11 @@ namespace FinFolio.ClientRepository.Configuration
             builder.HasKey(prop => prop.Id);
             builder.Property(prop => prop.UserID)
                .IsRequired();
-            builder.Property(prop => prop.ItemCode)
-               .HasColumnType("varchar(100)")
-               .HasMaxLength(100)
-               .IsRequired()
-               .IsUnicode(false);
-            builder.Property(prop => prop.ItemName)
-                .HasColumnType("varchar(200)")
-                .IsRequired(true)
-                .HasMaxLength(200);
+            builder.HasOne(prop => prop.Scheme)
+                .WithMany(prop => prop.Wishlist)
+                .HasForeignKey(prop => prop.SchemeId)
+                .HasConstraintName("FK_Scheme_Wishlist")
+                .IsRequired(true);
         }
     }
 }

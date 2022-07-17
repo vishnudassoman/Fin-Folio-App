@@ -16,7 +16,10 @@ namespace FinFolio.ClientRepository.Configuration
                 .HasMaxLength(225)
                 .IsRequired()
                 .IsUnicode();
-            builder.HasMany<PortFolioItem>(prop => prop.Items);
+            builder.HasMany<PortFolioItem>(prop => prop.Items)
+                .WithOne(prop => prop.PortFolio)
+                .OnDelete(DeleteBehavior.Cascade)
+                .IsRequired();
 
         }
     }

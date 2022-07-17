@@ -4,6 +4,7 @@ using FinFolio.ClientRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinFolio.ClientRepository.Migrations
 {
     [DbContext(typeof(CustomerDBContext))]
-    partial class CustomerDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220717183226_SchemeMasterTableWithRelations")]
+    partial class SchemeMasterTableWithRelations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,7 +64,7 @@ namespace FinFolio.ClientRepository.Migrations
                     b.Property<int>("NoOfUnits")
                         .HasColumnType("int");
 
-                    b.Property<int>("PortFolioId")
+                    b.Property<int?>("PortFolioId")
                         .HasColumnType("int");
 
                     b.Property<int>("PortFolioItemType")
@@ -136,20 +138,15 @@ namespace FinFolio.ClientRepository.Migrations
 
             modelBuilder.Entity("FinFolio.ClientRepository.Entities.PortFolioItem", b =>
                 {
-                    b.HasOne("FinFolio.ClientRepository.Entities.PortFolio", "PortFolio")
+                    b.HasOne("FinFolio.ClientRepository.Entities.PortFolio", null)
                         .WithMany("Items")
-                        .HasForeignKey("PortFolioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_PortFolio_PortFolioItem");
+                        .HasForeignKey("PortFolioId");
 
                     b.HasOne("FinFolio.ClientRepository.Entities.Scheme", "Scheme")
                         .WithMany("PortFolioItems")
                         .HasForeignKey("SchemeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .HasConstraintName("FK_Scheme_PortFolioItem");
-
-                    b.Navigation("PortFolio");
 
                     b.Navigation("Scheme");
                 });
