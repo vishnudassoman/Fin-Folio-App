@@ -1,8 +1,8 @@
-﻿using FinFolio.ClientRepository.Entities;
+﻿using FinFolio.PortFolioRepository.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace FinFolio.ClientRepository.Configuration
+namespace FinFolio.PortFolioRepository.Configuration
 {
     public class PortFolioEntityTypeConfiguration : IEntityTypeConfiguration<PortFolio>
     {

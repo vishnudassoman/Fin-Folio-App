@@ -5,11 +5,11 @@ VisualStudioVersion = 17.2.32505.173
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinFolio.Web", "FinFolio.Web\FinFolio.Web.csproj", "{56ED4529-7723-4ADD-BCA3-C652AD167ACB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinFolio.ClientService", "FinFolio.ClientServiceFunctions\FinFolio.ClientService.csproj", "{58E3EBE2-A599-4A0B-9F6F-FAD7C4AEAE55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinFolio.PortFolio.WebAPI", "FinFolio.ClientServiceFunctions\FinFolio.PortFolio.WebAPI.csproj", "{58E3EBE2-A599-4A0B-9F6F-FAD7C4AEAE55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinFolio.ClientCore", "FinFolio.ClientCore\FinFolio.ClientCore.csproj", "{2349ADEB-07BA-4515-B83F-FE7897AA677A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinFolio.PortFolioCore", "FinFolio.ClientCore\FinFolio.PortFolioCore.csproj", "{2349ADEB-07BA-4515-B83F-FE7897AA677A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinFolio.ClientRepository", "FinFolio.ClientRepository\FinFolio.ClientRepository.csproj", "{951D2088-2C79-4734-80C5-9F4BA2775951}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinFolio.PortFolioRepository", "FinFolio.ClientRepository\FinFolio.PortFolioRepository.csproj", "{951D2088-2C79-4734-80C5-9F4BA2775951}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

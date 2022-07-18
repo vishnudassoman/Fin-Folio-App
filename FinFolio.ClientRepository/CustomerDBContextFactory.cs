@@ -1,15 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace FinFolio.ClientRepository
+namespace FinFolio.PortFolioRepository
 {
-    public class CustomerDBContextFactory : IDesignTimeDbContextFactory<CustomerDBContext>
+    public class PortFolioDBContextFactory : IDesignTimeDbContextFactory<PortFolioDBContext>
     {
-        public CustomerDBContext CreateDbContext(string[] args)
+        public PortFolioDBContext CreateDbContext(string[] args)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<CustomerDBContext>();
-            optionsBuilder.UseSqlServer<CustomerDBContext>("Data Source=.;Initial Catalog=Portfolio;Integrated Security=True");
-            return new CustomerDBContext(optionsBuilder.Options);
+            var optionsBuilder = new DbContextOptionsBuilder<PortFolioDBContext>();
+            optionsBuilder.UseSqlServer<PortFolioDBContext>("Data Source=.;Initial Catalog=Portfolio;Integrated Security=True");
+            return new PortFolioDBContext(optionsBuilder.Options);
         }
     }
 }

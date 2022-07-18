@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace FinFolio.ClientRepository.Migrations
+namespace FinFolio.PortFolioRepository.Migrations
 {
     public partial class InitialDBSetup : Migration
     {

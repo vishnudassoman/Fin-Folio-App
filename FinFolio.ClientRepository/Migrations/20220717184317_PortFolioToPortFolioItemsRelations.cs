@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace FinFolio.ClientRepository.Migrations
+namespace FinFolio.PortFolioRepository.Migrations
 {
     public partial class PortFolioToPortFolioItemsRelations : Migration
     {

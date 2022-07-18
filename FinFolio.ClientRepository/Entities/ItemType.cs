@@ -1,4 +1,4 @@
-﻿namespace FinFolio.ClientRepository.Entities
+﻿namespace FinFolio.PortFolioRepository.Entities
 {
     public enum ItemType
     {

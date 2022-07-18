@@ -11,7 +11,7 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace FinFolio.ClientService.Functions
+namespace FinFolio.PortFolioService.Functions
 {
     public class GetFolios
     {

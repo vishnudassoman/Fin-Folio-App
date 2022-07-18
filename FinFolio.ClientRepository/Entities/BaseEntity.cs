@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FinFolio.ClientRepository.Entities
+namespace FinFolio.PortFolioRepository.Entities
 {
     public class BaseEntity
     {

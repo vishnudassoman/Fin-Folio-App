@@ -1,13 +1,13 @@
-﻿using FinFolio.ClientRepository.Configuration;
-using FinFolio.ClientRepository.Entities;
+﻿using FinFolio.PortFolioRepository.Configuration;
+using FinFolio.PortFolioRepository.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace FinFolio.ClientRepository
+namespace FinFolio.PortFolioRepository
 {
-    public class CustomerDBContext : DbContext
+    public class PortFolioDBContext : DbContext
     {
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        public CustomerDBContext(DbContextOptions<CustomerDBContext> options) : base(options)
+        public PortFolioDBContext(DbContextOptions<PortFolioDBContext> options) : base(options)
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
         }
