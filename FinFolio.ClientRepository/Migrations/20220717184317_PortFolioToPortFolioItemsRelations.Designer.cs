@@ -24,7 +24,7 @@ namespace FinFolio.PortFolioRepository.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("FinFolio.ClientRepository.Entities.PortFolio", b =>
+            modelBuilder.Entity("FinFolio.PortFolioRepository.Entities.PortFolio", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -46,7 +46,7 @@ namespace FinFolio.PortFolioRepository.Migrations
                     b.ToTable("PortFolios");
                 });
 
-            modelBuilder.Entity("FinFolio.ClientRepository.Entities.PortFolioItem", b =>
+            modelBuilder.Entity("FinFolio.PortFolioRepository.Entities.PortFolioItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -85,7 +85,7 @@ namespace FinFolio.PortFolioRepository.Migrations
                     b.ToTable("PortFolioItems");
                 });
 
-            modelBuilder.Entity("FinFolio.ClientRepository.Entities.Scheme", b =>
+            modelBuilder.Entity("FinFolio.PortFolioRepository.Entities.Scheme", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -115,7 +115,7 @@ namespace FinFolio.PortFolioRepository.Migrations
                     b.ToTable("Schemes");
                 });
 
-            modelBuilder.Entity("FinFolio.ClientRepository.Entities.Wishlist", b =>
+            modelBuilder.Entity("FinFolio.PortFolioRepository.Entities.Wishlist", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -136,16 +136,16 @@ namespace FinFolio.PortFolioRepository.Migrations
                     b.ToTable("Wishlist");
                 });
 
-            modelBuilder.Entity("FinFolio.ClientRepository.Entities.PortFolioItem", b =>
+            modelBuilder.Entity("FinFolio.PortFolioRepository.Entities.PortFolioItem", b =>
                 {
-                    b.HasOne("FinFolio.ClientRepository.Entities.PortFolio", "PortFolio")
+                    b.HasOne("FinFolio.PortFolioRepository.Entities.PortFolio", "PortFolio")
                         .WithMany("Items")
                         .HasForeignKey("PortFolioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_PortFolio_PortFolioItem");
 
-                    b.HasOne("FinFolio.ClientRepository.Entities.Scheme", "Scheme")
+                    b.HasOne("FinFolio.PortFolioRepository.Entities.Scheme", "Scheme")
                         .WithMany("PortFolioItems")
                         .HasForeignKey("SchemeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -156,9 +156,9 @@ namespace FinFolio.PortFolioRepository.Migrations
                     b.Navigation("Scheme");
                 });
 
-            modelBuilder.Entity("FinFolio.ClientRepository.Entities.Wishlist", b =>
+            modelBuilder.Entity("FinFolio.PortFolioRepository.Entities.Wishlist", b =>
                 {
-                    b.HasOne("FinFolio.ClientRepository.Entities.Scheme", "Scheme")
+                    b.HasOne("FinFolio.PortFolioRepository.Entities.Scheme", "Scheme")
                         .WithMany("Wishlist")
                         .HasForeignKey("SchemeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -168,12 +168,12 @@ namespace FinFolio.PortFolioRepository.Migrations
                     b.Navigation("Scheme");
                 });
 
-            modelBuilder.Entity("FinFolio.ClientRepository.Entities.PortFolio", b =>
+            modelBuilder.Entity("FinFolio.PortFolioRepository.Entities.PortFolio", b =>
                 {
                     b.Navigation("Items");
                 });
 
-            modelBuilder.Entity("FinFolio.ClientRepository.Entities.Scheme", b =>
+            modelBuilder.Entity("FinFolio.PortFolioRepository.Entities.Scheme", b =>
                 {
                     b.Navigation("PortFolioItems");
 

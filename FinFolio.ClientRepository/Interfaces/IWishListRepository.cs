@@ -4,9 +4,8 @@ namespace FinFolio.PortFolioRepository.Interfaces
 {
     public interface IWishlistRepository
     {
-        public Wishlist GetWishlistByUserId(int userId);
-        public Wishlist GetWishlistById(int id);
-        public Wishlist CreateWishList(Wishlist wishlist);
-        public Wishlist UpdateWishlist(Wishlist wishlist);
+        Task<List<Wishlist>> GetWishlistByUserIdAsync(int userId);
+        Task<Wishlist> CreateWishListAsync(Wishlist wishlist);
+        Task<Wishlist> UpdateWishlistAsync(Wishlist wishlist);
     }
 }

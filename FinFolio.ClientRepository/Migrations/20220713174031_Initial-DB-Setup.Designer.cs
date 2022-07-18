@@ -24,7 +24,7 @@ namespace FinFolio.PortFolioRepository.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("FinFolio.ClientRepository.Entities.PortFolio", b =>
+            modelBuilder.Entity("FinFolio.PortFolioRepository.Entities.PortFolio", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -46,7 +46,7 @@ namespace FinFolio.PortFolioRepository.Migrations
                     b.ToTable("PortFolios");
                 });
 
-            modelBuilder.Entity("FinFolio.ClientRepository.Entities.PortFolioItem", b =>
+            modelBuilder.Entity("FinFolio.PortFolioRepository.Entities.PortFolioItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -91,7 +91,7 @@ namespace FinFolio.PortFolioRepository.Migrations
                     b.ToTable("PortFolioItems");
                 });
 
-            modelBuilder.Entity("FinFolio.ClientRepository.Entities.Wishlist", b =>
+            modelBuilder.Entity("FinFolio.PortFolioRepository.Entities.Wishlist", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -118,14 +118,14 @@ namespace FinFolio.PortFolioRepository.Migrations
                     b.ToTable("Wishlist");
                 });
 
-            modelBuilder.Entity("FinFolio.ClientRepository.Entities.PortFolioItem", b =>
+            modelBuilder.Entity("FinFolio.PortFolioRepository.Entities.PortFolioItem", b =>
                 {
-                    b.HasOne("FinFolio.ClientRepository.Entities.PortFolio", null)
+                    b.HasOne("FinFolio.PortFolioRepository.Entities.PortFolio", null)
                         .WithMany("Items")
                         .HasForeignKey("PortFolioId");
                 });
 
-            modelBuilder.Entity("FinFolio.ClientRepository.Entities.PortFolio", b =>
+            modelBuilder.Entity("FinFolio.PortFolioRepository.Entities.PortFolio", b =>
                 {
                     b.Navigation("Items");
                 });
