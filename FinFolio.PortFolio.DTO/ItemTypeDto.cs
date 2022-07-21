@@ -1,6 +1,6 @@
 ﻿namespace FinFolio.PortFolio.DTO
 {
-    public enum ItemType
+    public enum ItemTypeDto
     {
         MutualFund = 0,
         Stock = 1
