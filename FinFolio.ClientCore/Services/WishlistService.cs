@@ -33,10 +33,6 @@ namespace FinFolio.PortFolioCore.Services
                     Scheme = new SchemeDto
                     {
                         Id = createdWishlist.SchemeId,
-                        Code = createdWishlist.Scheme.Code,
-                        IsActive = createdWishlist.Scheme.IsActive,
-                        LaunchDate = createdWishlist.Scheme.LaunchDate,
-                        NAVName = createdWishlist.Scheme.NAVName
                     }
                 };
             }
@@ -63,7 +59,14 @@ namespace FinFolio.PortFolioCore.Services
                                      {
                                          Id = w.Id,
                                          UserID = w.UserID,
-                                         Scheme = new SchemeDto { Id = w.SchemeId, Code = w.Scheme.Code, IsActive = w.Scheme.IsActive, LaunchDate = w.Scheme.LaunchDate }
+                                         Scheme = new SchemeDto
+                                         {
+                                             Id = w.SchemeId,
+                                             Code = w.Scheme.Code,
+                                             IsActive = w.Scheme.IsActive,
+                                             NAVName = w.Scheme.NAVName,
+                                             LaunchDate = w.Scheme.LaunchDate
+                                         }
                                      }).ToList());
                 }
             }

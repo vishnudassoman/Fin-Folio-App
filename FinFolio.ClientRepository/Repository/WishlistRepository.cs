@@ -30,7 +30,10 @@ namespace FinFolio.PortFolioRepository.Repository
         {
             using (_dbContext)
             {
-                return await _dbContext.Wishlist.Where(wl => wl.UserID == userId).ToListAsync();
+                return await _dbContext.Wishlist
+                    .Where(wl => wl.UserID == userId)
+                    .Include(wl => wl.Scheme)
+                    .ToListAsync();
             }
         }
 

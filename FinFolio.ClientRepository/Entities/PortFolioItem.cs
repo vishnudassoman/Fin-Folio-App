@@ -9,8 +9,8 @@
         public bool IsSIP { get; set; }
         public ItemType PortFolioItemType { get; set; }
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        public Scheme Scheme { get; set; }
-        public PortFolio PortFolio { get; set; }
+        public virtual Scheme Scheme { get; set; }
+        public virtual PortFolio PortFolio { get; set; }
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
     }
 }

@@ -22,7 +22,8 @@ namespace FinFolio.PortFolio.WebAPI
             _configuration = builder.Services.BuildServiceProvider().GetService<IConfiguration>();
             builder.Services.AddDbContext<PortFolioDBContext>(options =>
             options.UseSqlServer(_configuration.GetConnectionString("PortFolioDBConnection")
-            ));
+            )
+            );
             //Repository Dependency
             builder.Services.AddScoped<IWishlistRepository, WishlistRepository>();
             //Core Service Dependency
