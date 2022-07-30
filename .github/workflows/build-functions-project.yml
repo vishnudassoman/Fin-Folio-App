@@ -1,0 +1,27 @@
+name: .NET
+
+on:
+  push:
+    branches: [ "master" ]
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build-Dto
+      run: dotnet build FinFolio.PortFolio.DTO/FinFolio.PortFolio.DTO.csproj --no-restore
+    - name: Build-PortFolioRepository
+      run: dotnet build FiFinFolio.PortFolioRepository/FinFolio.PortFolioRepository.csproj --no-restore
+    - name: Build-PortFolioCore
+      run: dotnet build FinFolio.PortFolioCore/FinFolio.PortFolioCore.csproj --no-restore
+    - name: Build-PortFolioWebApi
+      run: dotnet build FinFolio.PortFolio.WebAPI/FinFolio.PortFolio.WebAPI.csproj --no-restore 
+   
