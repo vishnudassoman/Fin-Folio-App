@@ -17,7 +17,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build-Dto
-      run: dotnet build ../FinFolio.PortFolio.DTO/FinFolio.PortFolio.DTO.csproj --no-restore
+      run: dotnet build /FinFolio.PortFolio.DTO/FinFolio.PortFolio.DTO.csproj --no-restore
     - name: Build-PortFolioRepository
       run: dotnet build ../FiFinFolio.PortFolioRepository/FinFolio.PortFolioRepository.csproj --no-restore
     - name: Build-PortFolioCore
