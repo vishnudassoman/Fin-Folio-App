@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 env:
   AZURE_FUNC_NAME: FinFolioWebApi
-  AZURE_FUNC_PACKAGE_PATH: '../FinFolioWebApi ' 
+  AZURE_FUNC_PACKAGE_PATH: 'FinFolioWebApi ' 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
  # This workflow contains a single job called "publish"
