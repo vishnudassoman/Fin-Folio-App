@@ -18,7 +18,14 @@ jobs:
 
     # Steps represent a se quence of tasks that will be executed as part of the job
     steps:
-            
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+        with:
+         dotnet-version: 6.0.x
+      - name: Restore dependencies
+        run: dotnet restore   
+        
       - name: Publish WebApi Artifacts
         run:  dotnet publish FinFolio.ClientServiceFunctions/FinFolio.PortFolio.WebAPI.csproj -c Release -o ../FinFolioWebApi -r linux-x64 --self-contained true /p:UseAppHost=true
       
