@@ -34,7 +34,7 @@ jobs:
 
       - name: Zip output
         run: zip -qq -r FinFolioWebApi.zip dist FinFolioWebApi
-        working-directory: ${{env.AZURE_FUNC_PACKAGE_PATH}}
+#working-directory: ${{env.AZURE_FUNC_PACKAGE_PATH}}
       
      # - name: Azure-Functions-Deploy-Action
      #   uses: Azure/functions-action@v1.4.6
