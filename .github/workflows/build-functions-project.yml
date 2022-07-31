@@ -17,11 +17,13 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build-Dto
-      run: dotnet build FinFolio.PortFolio.DTO/FinFolio.PortFolio.DTO.csproj --no-restore
+      run: dotnet build Release FinFolio.PortFolio.DTO/FinFolio.PortFolio.DTO.csproj --configuration --no-restore 
     - name: Build-PortFolioRepository
-      run: dotnet build FinFolio.ClientRepository/FinFolio.PortFolioRepository.csproj --no-restore
+      run: dotnet build Release FinFolio.ClientRepository/FinFolio.PortFolioRepository.csproj --configuration --no-restore 
     - name: Build-PortFolioCore
-      run: dotnet build FinFolio.ClientCore/FinFolio.PortFolioCore.csproj --no-restore
+      run: dotnet build Release FinFolio.ClientCore/FinFolio.PortFolioCore.csproj --configuration --no-restore 
     - name: Build-PortFolioWebApi
-      run: dotnet build FinFolio.ClientServiceFunctions/FinFolio.PortFolio.WebAPI.csproj --no-restore 
+      run: dotnet build Release FinFolio.ClientServiceFunctions/FinFolio.PortFolio.WebAPI.csproj --configuration --no-restore 
+    - name: Publish WebApi Artifacts
+      run:  dotnet publish -c Release -o ../FinFolioWebApi -r linux-x64 --self-contained true /p:UseAppHost=true
    
