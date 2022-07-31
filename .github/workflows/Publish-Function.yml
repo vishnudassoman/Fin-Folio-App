@@ -6,17 +6,32 @@ name: Publish-Functions
 on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
+env:
+  AZURE_FUNC_NAME: FinFolioWebApi
+  AZURE_FUNC_PACKAGE_PATH: '.' 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
- # This workflow contains a single job called "build"
-  build:
+ # This workflow contains a single job called "publish"
+  publish:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
     # Steps represent a se quence of tasks that will be executed as part of the job
     steps:
             
-      - name: Azure-Functions-Action
-        uses: Azure/functions-action@v1.4.6
+      - name: Publish WebApi Artifacts
+        run:  dotnet publish FinFolio.ClientServiceFunctions/FinFolio.PortFolio.WebAPI.csproj -c Release -o ../FinFolioWebApi -r linux-x64 --self-contained true /p:UseAppHost=true
+      
+      - name: Install zip
+        uses: montudor/action-zip@v1
 
+      - name: Zip output
+        run: zip -qq -r FinFolioWebApi.zip dist FinFolioWebApi
+        working-directory: ${{env.AZURE_FUNC_PACKAGE_PATH}}
+      
+     # - name: Azure-Functions-Deploy-Action
+     #   uses: Azure/functions-action@v1.4.6
+     #   with:
+       #   app-name: ${{env.AZURE_FUNC_NAME}}
+       #   package: '${{env.AZURE_FUNC_PACKAGE_PATH}}/FinFolioWebApi'
+       #   publish-profile: ${{secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE}}
