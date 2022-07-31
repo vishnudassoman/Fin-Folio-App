@@ -24,6 +24,5 @@ jobs:
       run: dotnet build FinFolio.ClientCore/FinFolio.PortFolioCore.csproj --configuration Release --no-restore 
     - name: Build-PortFolioWebApi
       run: dotnet build FinFolio.ClientServiceFunctions/FinFolio.PortFolio.WebAPI.csproj --configuration Release --no-restore 
-    - name: Publish WebApi Artifacts
-      run:  dotnet publish -c Release -o ../FinFolioWebApi -r linux-x64 --self-contained true /p:UseAppHost=true
+
    
