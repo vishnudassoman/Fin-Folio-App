@@ -28,15 +28,15 @@ jobs:
         
       - name: Publish WebApi Artifacts
         run:  dotnet publish FinFolio.ClientServiceFunctions/FinFolio.PortFolio.WebAPI.csproj -c Release -o '../${{env.AZURE_FUNC_PACKAGE_PATH}}' -r linux-x64 --self-contained true /p:UseAppHost=true
-      - uses: vimtor/action-zip@v1
-        with:
-          files: FinFolioWebApi
-          recursive: false
-          dest: FinFolioWebApi.zip
+     # - uses: vimtor/action-zip@v1
+       # with:
+        #  files: FinFolioWebApi
+         # recursive: false
+          #dest: FinFolioWebApi.zip
       
       - name: Azure-Functions-Deploy-Action
         uses: Azure/functions-action@v1.4.6
         with:
           app-name: ${{env.AZURE_FUNC_NAME}}
-          package: '${{env.AZURE_FUNC_PACKAGE_PATH}}/FinFolioWebApi.zip'
+          package: '${{env.AZURE_FUNC_PACKAGE_PATH}}'
           publish-profile: ${{secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE}}
