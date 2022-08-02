@@ -12,8 +12,11 @@ namespace FinFolio.PortFolioRepository.Configuration
             builder.Property(prop => prop.Code)
                 .HasColumnType("int")
                 .IsRequired();
+            builder.Property(prop => prop.AMC)
+                .HasColumnType("nvarchar(255)")
+                .IsRequired();
             builder.Property(prop => prop.NAVName)
-                .HasColumnType("varchar(255)")
+                .HasColumnType("nvarchar(255)")
                 .HasMaxLength(255)
                 .IsRequired();
             builder.Property(prop => prop.LaunchDate)

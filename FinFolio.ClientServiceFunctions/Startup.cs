@@ -26,8 +26,10 @@ namespace FinFolio.PortFolio.WebAPI
             );
             //Repository Dependency
             builder.Services.AddScoped<IWishlistRepository, WishlistRepository>();
+            builder.Services.AddScoped<ISchemeRepository, SchemeRepository>();
             //Core Service Dependency
             builder.Services.AddScoped<IWishlistService, WishlistService>();
+            builder.Services.AddScoped<ISchemeService, SchemeService>();
         }
 
         public override void ConfigureAppConfiguration(IFunctionsConfigurationBuilder builder)

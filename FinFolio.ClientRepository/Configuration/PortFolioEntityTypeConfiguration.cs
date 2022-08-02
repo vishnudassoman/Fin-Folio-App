@@ -12,7 +12,7 @@ namespace FinFolio.PortFolioRepository.Configuration
             builder.Property(prop => prop.UserID)
                 .IsRequired();
             builder.Property(prop => prop.Name)
-                .HasColumnType("varchar(225)")
+                .HasColumnType("nvarchar(225)")
                 .HasMaxLength(225)
                 .IsRequired()
                 .IsUnicode();

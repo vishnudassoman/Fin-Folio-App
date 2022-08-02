@@ -3,6 +3,7 @@
     public class Scheme : BaseEntity
     {
         public long Code { get; set; }
+        public string AMC { get; set; } = string.Empty;
         public string NAVName { get; set; } = string.Empty;
         public DateTime LaunchDate { get; set; }
         public bool? IsActive { get; set; }
