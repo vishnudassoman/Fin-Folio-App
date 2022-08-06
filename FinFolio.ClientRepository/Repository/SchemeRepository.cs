@@ -13,13 +13,10 @@ namespace FinFolio.PortFolioRepository.Repository
         }
         public async Task<List<Scheme>> GetSchemesAsync(string name)
         {
-            using (_dbContext)
-            {
-                return await _dbContext.Schemes
-                                        .Where(x => x.NAVName.Contains(name))
-                                        .ToListAsync();
-
-            }
+            return await _dbContext.Schemes
+                                    .Where(x => x.NAVName.Contains(name))
+                                    .OrderBy(s => s.NAVName)
+                                    .ToListAsync();
         }
     }
 }

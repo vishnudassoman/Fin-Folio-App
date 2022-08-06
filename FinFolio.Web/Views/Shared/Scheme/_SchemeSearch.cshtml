@@ -1,0 +1,11 @@
+﻿@model IEnumerable<FinFolio.Web.Models.SchemeViewModel>
+
+<div id='url-data' class='col-lg-6' style='padding-top:15px'>
+    <div class='content'>
+        <ejs-autocomplete id="Id" placeholder="Select a Scheme" minLength="3" noRecordsTemplate="@Html.Raw("<span class='norecord'> No Scheme found !</span>")"  actionFailureTemplate="@Html.Raw("<span class='action-failure'> Data fetch get fails</span>")">
+            <e-data-manager adaptor="UrlAdaptor" url="/Scheme/Search" crossDomain="true"></e-data-manager>
+            <e-autocomplete-fields value="name"></e-autocomplete-fields>
+        </ejs-autocomplete>
+    </div>
+</div>
+

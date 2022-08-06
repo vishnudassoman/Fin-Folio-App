@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authentication;
+using FinFolio.Web.Infrastructure;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -7,19 +7,19 @@ using Microsoft.Identity.Web.UI;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var initialScopes = builder.Configuration["DownstreamApi:Scopes"]?.Split(' ') ?? builder.Configuration["MicrosoftGraph:Scopes"]?.Split(' ');
-
 // Add services to the container.
 builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
     .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"));
-        //.EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
-        //    .AddMicrosoftGraph(builder.Configuration.GetSection("MicrosoftGraph"))
-        //    .AddInMemoryTokenCaches();
 
+Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(builder.Configuration.GetValue<string>("SyncFusionLicenseKey"));
 builder.Services.AddAuthorization(options =>
 {
     options.FallbackPolicy = options.DefaultPolicy;
 });
+
+builder.Services.AddScoped<IPortfolioFunctionAdapter, PortfolioFunctionAdapter>();
+
+builder.Services.AddApplicationInsightsTelemetry();
 
 builder.Services.AddControllersWithViews(options =>
 {

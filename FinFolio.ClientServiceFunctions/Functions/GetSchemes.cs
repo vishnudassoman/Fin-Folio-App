@@ -31,20 +31,16 @@ namespace FinFolio.PortFolio.WebAPI.Functions
         [FunctionName("GetSchemes")]
         [OpenApiOperation(operationId: "Run", tags: new[] { "schemename" })]
         [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]
-        [OpenApiParameter(name: "schemename", In = ParameterLocation.Query, Required = true, Type = typeof(string), Description = "The **schemename** parameter")]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(List<SchemeDto>), Description = "The OK response")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req)
+            [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] HttpRequest req)
         {
             _logger.LogInformation("C# HTTP trigger function GetSchemes - start.");
             try
             {
-                string schemeName = req.Query["schemename"];
-
                 string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-                dynamic data = JsonConvert.DeserializeObject(requestBody);
-                schemeName = schemeName ?? data?.schemename;
-                List<SchemeDto> schemes = await _schemeService.GetSchemesAsync(schemeName);
+                SchemeRequestDto schemeRequest = JsonConvert.DeserializeObject<SchemeRequestDto>(requestBody);
+                List<SchemeDto> schemes = await _schemeService.GetSchemesAsync(schemeRequest.NAVName);
                 if (schemes != null && schemes.Any())
                 {
                     return new OkObjectResult(schemes);
