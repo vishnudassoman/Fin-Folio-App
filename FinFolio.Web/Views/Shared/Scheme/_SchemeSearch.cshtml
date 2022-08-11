@@ -5,12 +5,15 @@
         select="onSelect"
         >
             <e-data-manager adaptor="UrlAdaptor" url="/Scheme/Search" crossDomain="true"></e-data-manager>
-            <e-autocomplete-fields text="name" value="code"></e-autocomplete-fields>
+            <e-autocomplete-fields text="name" value="id"></e-autocomplete-fields>
         </ejs-autocomplete>
 </div>
 
 <script type="text/javascript">
     function onSelect(args) { 
-            document.getElementById('fundSearchtxt').innerText = args.itemData.code; 
+        if ($("#schemeDetailsCollapse") != undefined) {
+           $("#schemeDetailsCollapse").trigger( "expand", [ args.itemData.id, args.itemData.name ] );
+            }
         } 
+        
 </script>

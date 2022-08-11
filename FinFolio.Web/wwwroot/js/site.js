@@ -2,3 +2,14 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+$(document).ready(function () {
+    $("#schemeDetailsCollapse").on("expand", function (event, id, name) {
+        $("#divSpinner").addClass("spinner-border");
+        var url = $("#schemeDetailsUrl").val();
+        $("#schemeDetailsDiv").load(url + '/' + id);
+
+        $("#divSpinner").removeClass("spinner-border");
+
+        $(".collapse").collapse();
+    });
+});

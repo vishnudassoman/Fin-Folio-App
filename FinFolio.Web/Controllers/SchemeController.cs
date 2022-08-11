@@ -23,6 +23,17 @@ namespace FinFolio.Web.Controllers
         {
             return View();
         }
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> SchemeDetails(int id)
+        {
+            if (id <= 0)
+            {
+                return NotFound();
+            }
+            SchemeViewModel schemeViewModel = await this.GetSchemeDetails(id);
+            return PartialView("Views/Shared/Scheme/_SchemeDetails.cshtml", schemeViewModel);
+        }
 
         [AllowAnonymous]
         public async Task<IActionResult> Search([FromBody] Data searchData)
@@ -59,6 +70,39 @@ namespace FinFolio.Web.Controllers
                 _logger.LogError(ex, string.Empty, schemeName);
             }
             return new List<SchemeViewModel>();
+        }
+        private async Task<SchemeViewModel> GetSchemeDetails(int id)
+        {
+            try
+            {
+                OperationResult<SchemeDto> result = await _portfolioFunctionAdapter.ExecuteFunction<SchemeRequestDto, SchemeDto>("GetSchemeDetails", new SchemeRequestDto { Id = id });
+                if (result.IsSuccess)
+                {
+                    SchemeViewModel schemeVM = (result.Data != null) ? new SchemeViewModel
+                    {
+                        Id = result.Data.Id,
+                        AMC = result.Data.AMC,
+                        Code = result.Data.Code,
+                        IsActive = result.Data.IsActive,
+                        LaunchDate = result.Data.LaunchDate,
+                        Name = result.Data.NAVName,
+                        NAVHistory = result.Data.NAV
+                            .Select<NavDto, SchemeNavViewModel>(navDto =>
+                            new SchemeNavViewModel
+                            {
+                                Date = navDto.Date,
+                                Value = navDto.Value
+                            })
+                        .ToList()
+                    } : new SchemeViewModel();
+                    return schemeVM;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Exception while fetching scheme with id", id);
+            }
+            return new SchemeViewModel();
         }
         #endregion Private Methods
     }

@@ -18,5 +18,10 @@ namespace FinFolio.PortFolioRepository.Repository
                                     .OrderBy(s => s.NAVName)
                                     .ToListAsync();
         }
+
+        public async Task<Scheme> GetSchemeDetailsAsync(int id)
+        {
+            return await _dbContext.Schemes.FindAsync(id);
+        }
     }
 }

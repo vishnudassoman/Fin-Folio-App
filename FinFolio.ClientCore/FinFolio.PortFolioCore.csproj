@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\FinFolio.ClientRepository\FinFolio.PortFolioRepository.csproj" />
     <ProjectReference Include="..\FinFolio.PortFolio.DTO\FinFolio.PortFolio.DTO.csproj" />
   </ItemGroup>
