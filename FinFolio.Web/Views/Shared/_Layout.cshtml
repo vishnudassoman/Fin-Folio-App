@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -26,7 +27,7 @@
     <link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/20.2.36/bootstrap5-dark.css" />
     <!-- Template Stylesheet -->
     <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
-    @*<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />*@
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <script src="https://cdn.syncfusion.com/ej2/20.2.36/dist/ej2.min.js"></script>
 
 </head>
@@ -82,16 +83,22 @@
                 <a href="#" class="navbar-brand mx-4 mb-3">
                     <h3 class="text-primary"><i class="bi bi-arrow-up"></i>Fin Folio</h3>
                 </a>
-                <div class="d-flex align-items-center ms-4 mb-4">
-                    <div class="position-relative">
-                        <img class="rounded-circle" src="images/user.webp" alt="" style="width: 40px; height: 40px;">
-                        <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+               
+                   @if (User.Identity?.IsAuthenticated == true)
+                   {
+                    <div class="d-flex align-items-center ms-4 mb-4">
+                        <div class="position-relative">
+                            <img class="rounded-circle" src="images/user.webp" alt="" style="width: 40px; height: 40px;">
+                            <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
+                            </div>
+                        </div>
+                        <div class="ms-3">
+                            <h6 class="mb-0">@User.FindFirst(ClaimTypes.GivenName).Value</h6>
+                        </div>
                     </div>
-                    <div class="ms-3">
-                        <h6 class="mb-0">Vishnu S</h6>
-                        <span>Admin</span>
-                    </div>
-                </div>
+                   }
+
+               
                 <div class="navbar-nav w-100">
                     <a href="index.html" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <div class="nav-item dropdown">
@@ -198,17 +205,27 @@
                             <a href="#" class="dropdown-item text-center">See all notifications</a>
                         </div>
                     </div>
-                    <div class="nav-item dropdown">
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <img class="rounded-circle me-lg-2" src="images/user.webp" alt="" style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex">Vishnu S</span>
+                            <span class="d-none d-lg-inline-flex">@User.FindFirst(ClaimTypes.GivenName).Value</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">My Profile</a>
                             <a href="#" class="dropdown-item">Settings</a>
-                            <a href="#" class="dropdown-item">Log Out</a>
+                            <a class="dropdown-item" asp-area="MicrosoftIdentity" asp-controller="Account" asp-action="SignOut">Sign Out</a>
                         </div>
-                    </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="nav-item">
+                            <a class="dropdown-item" asp-area="MicrosoftIdentity" asp-controller="Account" asp-action="SignIn">Sign In</a>
+                        </div>
+                    }
+
                 </div>
             </nav>
             <!-- Navbar End -->
@@ -216,7 +233,7 @@
 
             <!-- Blank Start -->
             <div class="container-fluid pt-4 px-4">
-                <div class="row vh-100 bg-secondary rounded align-items-center justify-content-center mx-0">
+                <div class="row vh-75 bg-secondary rounded align-items-center justify-content-center mx-0">
                       @RenderBody()  
                 </div>
             </div>

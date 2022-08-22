@@ -1,4 +1,9 @@
-﻿@using FinFolio.Web
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+@using System.Security.Principal
+@using FinFolio.Web
 @using FinFolio.Web.Models
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @addTagHelper *, Syncfusion.EJ2
+@inject IAuthorizationService AuthorizationService

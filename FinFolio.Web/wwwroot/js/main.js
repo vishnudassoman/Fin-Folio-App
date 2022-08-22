@@ -6,6 +6,7 @@
         setTimeout(function () {
             if ($('#spinner').length > 0) {
                 $('#spinner').removeClass('show');
+                $('.back-to-top').fadeOut('slow');
             }
         }, 1);
     };

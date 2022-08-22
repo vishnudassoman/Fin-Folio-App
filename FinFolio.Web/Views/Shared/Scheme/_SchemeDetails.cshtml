@@ -15,3 +15,16 @@
     }
 
 </div>
+        @if(User.Identity?.IsAuthenticated == true)
+        {
+            <div class="testimonial-item text-center">
+            <button type="button" class="btn btn-info m-2">Add To Wishlist</button>
+            </div> 
+        }
+        else
+        {
+             <div class="testimonial-item text-center">
+             <p class="text-warning">Please Sign In to add this fund to your wishlist!</p>
+             <a class="btn btn-primary m-2" asp-area="MicrosoftIdentity" asp-controller="Account" asp-action="SignIn" asp-route-id="@Model.Id">Sign in</a>
+            </div> 
+        }
