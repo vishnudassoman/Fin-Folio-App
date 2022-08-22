@@ -8,13 +8,13 @@
                         <p class="h5">You are at the right place !</p> 
                         <p class="h5">Search for <mark>mutual funds</mark> and start building your <mark>portfolio</mark> or create your <mark>wishlist</mark>.</p>
                         <partial name="~/Views/Shared/Scheme/_SchemeSearch.cshtml" /> 
-                        <div id="divSpinner" class="text-info" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                        <div id="schemeDetailsCollapse" class="collapse border rounded p-4 pb-0 mb-4">
+                        <br/>
+                     <div id="schemeDetailsCollapse" class="collapse border rounded p-4 pb-0 mb-4 ">
                             <input id="schemeDetailsUrl" type="hidden" value="@Url.Action("SchemeDetails", "Scheme")" />
-                            <div id="schemeDetailsDiv">
-
+                            <div id="ajaxSpinner" class="spinner-grow text-info" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <div id="schemeDetailsDiv" class="visually-hidden p-4 mb-4 bg-dark">
                             </div>
                         </div>
                     </div>

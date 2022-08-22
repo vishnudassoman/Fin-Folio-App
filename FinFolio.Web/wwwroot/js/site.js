@@ -3,13 +3,20 @@
 
 // Write your JavaScript code.
 $(document).ready(function () {
+    $(document).ajaxStart(
+        function (event, request, settings) {
+            $("#ajaxSpinner").removeClass("visually-hidden");
+            $("#schemeDetailsDiv").addClass("visually-hidden");
+        });
+    $(document).ajaxComplete(
+        function (event, request, settings) {
+            $("#ajaxSpinner").addClass("visually-hidden");
+            $("#schemeDetailsDiv").removeClass("visually-hidden");
+        });
     $("#schemeDetailsCollapse").on("expand", function (event, id, name) {
-        $("#divSpinner").addClass("spinner-border");
         var url = $("#schemeDetailsUrl").val();
         $("#schemeDetailsDiv").load(url + '/' + id);
-
-        $("#divSpinner").removeClass("spinner-border");
-
+        
         $(".collapse").collapse();
     });
 });
