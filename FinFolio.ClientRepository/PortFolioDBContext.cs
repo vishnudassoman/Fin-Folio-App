@@ -32,5 +32,6 @@ namespace FinFolio.PortFolioRepository
         public DbSet<PortFolioItem> PortFolioItems { get; set; }
         public DbSet<Wishlist> Wishlist { get; set; }
         public DbSet<Scheme> Schemes { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

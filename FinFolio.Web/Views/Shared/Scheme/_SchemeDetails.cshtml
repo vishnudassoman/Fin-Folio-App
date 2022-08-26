@@ -2,7 +2,7 @@
 @model FinFolio.Web.Models.SchemeViewModel
 
 <div class="testimonial-item text-center">
-   <h5 class="mb-1">@Model.Name</h5>
+   <h5 class="mb-1 text-info">@Model.Name</h5>
    <p class="h6">Fund House: @Model.AMC</p>
    @if (@Model.NAVHistory !=null && @Model.NAVHistory.Count > 1)
   {
