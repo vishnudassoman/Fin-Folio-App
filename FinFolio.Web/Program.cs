@@ -30,7 +30,6 @@ builder.Services.AddControllersWithViews(options =>
 });
 builder.Services.AddRazorPages()
     .AddMicrosoftIdentityUI();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

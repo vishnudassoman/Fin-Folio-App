@@ -28,13 +28,10 @@ namespace FinFolio.PortFolioRepository.Repository
         /// <returns></returns>
         public async Task<List<Wishlist>> GetWishlistByUserIdAsync(int userId)
         {
-            using (_dbContext)
-            {
-                return await _dbContext.Wishlist
-                    .Where(wl => wl.UserID == userId)
-                    .Include(wl => wl.Scheme)
-                    .ToListAsync();
-            }
+            return await _dbContext.Wishlist
+                .Where(wl => wl.UserID == userId)
+                .Include(wl => wl.Scheme)
+                .ToListAsync();
         }
 
         /// <summary>

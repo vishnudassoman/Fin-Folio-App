@@ -19,4 +19,13 @@ $(document).ready(function () {
         
         $(".collapse").collapse();
     });
+    $(document).on("showToast", function (isSucces, message) {
+        if (isSuccess === true) {
+            $("#toast").removeClass("alert-danger");
+            $("#toast").addClass("alert-success");
+        }
+        $("#toastLabel").val(message);
+        $("#toast").addClass("show");
+    });
+   
 });

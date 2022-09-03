@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
@@ -41,7 +42,15 @@ namespace FinFolio.PortFolio.WebAPI.Functions
                 string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
                 wishlist = JsonConvert.DeserializeObject<WishlistDto>(requestBody);
 
-                //TODO: validate the input.
+                List<WishlistDto> existingList = await _wishlistService.GetWishlistByUserIdAsync(wishlist.UserID);
+                if (existingList != null)
+                {
+                    WishlistDto existingSchemeDto = existingList.Find(w => w.Scheme?.Id == wishlist.Scheme?.Id);
+                    if (existingSchemeDto != null)
+                    {
+                        return new ObjectResult($"Scheme {existingSchemeDto.Scheme.NAVName} already exists in your wishlist") { StatusCode = (int)HttpStatusCode.Conflict };
+                    }
+                }
                 wishlist = await _wishlistService.CreateWishListAsync(wishlist);
             }
             catch (Exception ex)

@@ -8,18 +8,20 @@ using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 
 namespace FinFolio.PortFolio.WebAPI.Functions
 {
-    public class GetWishListByUser
+    public class List
     {
-        private readonly ILogger<GetWishListByUser> _logger;
+        private readonly ILogger<List> _logger;
         private readonly IWishlistService _wishlistService;
-        public GetWishListByUser(ILogger<GetWishListByUser> log, IWishlistService wishlistService)
+        public List(ILogger<List> log, IWishlistService wishlistService)
         {
             _logger = log;
             _wishlistService = wishlistService;
@@ -40,7 +42,13 @@ namespace FinFolio.PortFolio.WebAPI.Functions
             List<WishlistDto> wishlist = null;
             try
             {
-                if (int.TryParse(req.Query["userid"], out userId))
+                if (!int.TryParse(req.Query["userid"], out userId))
+                {
+                    string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+                    UserDto user = JsonConvert.DeserializeObject<UserDto>(requestBody);
+                    userId = user.Id;
+                }
+                if (userId != 0)
                 {
                     wishlist = await _wishlistService.GetWishlistByUserIdAsync(userId);
                 }

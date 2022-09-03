@@ -1,0 +1,26 @@
+﻿@model FinFolio.Web.Models.SaveAndListViewModel<WishlistViewModel>
+
+@{
+    ViewData["Title"] = "Wishlist";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if(Model.Result != null)
+{
+ @await Html.PartialAsync("~/Views/Shared/_ToastAlert.cshtml", Model.Result);
+}
+<h1 class="text-danger text-center">Wishlist</h1>
+    <div class="control-section">
+        <ejs-grid id="Grid" dataSource="@Model.ListItems" allowPaging="true">
+            <e-grid-pagesettings pageCount="5"></e-grid-pagesettings>
+            <e-grid-columns>
+                <e-grid-column field="Id" headerText="Wishlist Item ID" textAlign="Left" visible=false width="120"></e-grid-column>
+                <e-grid-column field="UserID" headerText="User ID" visible=false width="150"></e-grid-column>
+                <e-grid-column field="Code" headerText=" Scheme Code" textAlign="Right" visible=false width="130"></e-grid-column>
+                <e-grid-column field="NAVName" headerText="Name" textAlign="Left" width="120"></e-grid-column>
+                <e-grid-column field="NAV" format="N2" headerText="NAV" format="Right" width="150"></e-grid-column>
+            </e-grid-columns>
+
+        </ejs-grid>
+</div>
+
+

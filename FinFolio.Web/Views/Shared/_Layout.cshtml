@@ -34,7 +34,7 @@
 <body class="e-bigger">
      <div class="container-fluid position-relative d-flex p-0">
         <!-- Spinner Start -->
-        <div id="spinner" class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div id="spinner" class="bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
@@ -45,8 +45,7 @@
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-secondary navbar-dark">
-                
-                <a href="#" class="navbar-brand mx-4 mb-3">
+                <a href="~/" class="navbar-brand mx-4 mb-3">
                     <h3 class="text-primary"><i class="bi bi-arrow-up"></i>Fin Folio</h3>
                 </a>
                
@@ -54,18 +53,17 @@
                    {
                     <div class="d-flex align-items-center ms-4 mb-4">
                         <div class="position-relative">
-                            <img class="rounded-circle" src="images/user.webp" alt="" style="width: 40px; height: 40px;">
+                            <img class="rounded-circle" src="~/images/user.webp" alt="" style="width: 40px; height: 40px;">
                             <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
                             </div>
                         </div>
                         <div class="ms-3">
                             <h6 class="mb-0">@User.FindFirst(ClaimTypes.GivenName).Value</h6>
-                            <h6 class="mb-0">@User.FindFirst(ClaimTypes.NameIdentifier).Value</h6>
                         </div>
                     </div>
                    }
 
-               
+               <!--
                 <div class="navbar-nav w-100">
                     <a href="index.html" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <div class="nav-item dropdown">
@@ -90,6 +88,7 @@
                         </div>
                     </div>
                 </div>
+                -->
             </nav>
         </div>
         <!-- Sidebar End -->
@@ -109,6 +108,7 @@
                     <input class="form-control bg-dark border-0" type="search" placeholder="Search">
                 </form>
                 <div class="navbar-nav align-items-center ms-auto">
+                    <!--
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <i class="fa fa-envelope me-lg-2"></i>
@@ -172,11 +172,12 @@
                             <a href="#" class="dropdown-item text-center">See all notifications</a>
                         </div>
                     </div>
+                    -->
                     @if (User.Identity?.IsAuthenticated == true)
                     {
                         <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" src="images/user.webp" alt="" style="width: 40px; height: 40px;">
+                            <img class="rounded-circle me-lg-2" src="~/images/user.webp" alt="" style="width: 40px; height: 40px;">
                             <span class="d-none d-lg-inline-flex">@User.FindFirst(ClaimTypes.GivenName).Value</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
@@ -189,7 +190,7 @@
                     else
                     {
                         <div class="nav-item">
-                            <a class="dropdown-item" asp-area="MicrosoftIdentity" asp-controller="Account" asp-action="SignIn">Sign In</a>
+                            <a class="dropdown-item" asp-area="MicrosoftIdentity" asp-controller="Account" asp-action="SignIn" asp-route-redirectUri="/Home">Sign In</a>
                         </div>
                     }
 

@@ -32,7 +32,7 @@ namespace FinFolio.Web.Controllers
                 return NotFound();
             }
             SchemeViewModel schemeViewModel = await this.GetSchemeDetails(id);
-            return PartialView("Views/Shared/Scheme/_SchemeDetails.cshtml", schemeViewModel);
+            return View(schemeViewModel);
         }
 
         [AllowAnonymous]

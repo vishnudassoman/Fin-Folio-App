@@ -1,0 +1,26 @@
+﻿@model OperationResultViewModel;
+
+@if (Model != null && Model.ShowAlert)
+{
+    string alertCSSClass = string.Empty;
+    switch(Model.Type)
+    {
+        case AlertType.Info:
+            alertCSSClass = "alert-info";
+            break;
+        case AlertType.Warning:
+            alertCSSClass = "alert-warning";
+            break;
+        case AlertType.Error:
+            alertCSSClass = "alert-danger";
+            break;
+        case AlertType.Success:
+            alertCSSClass = "alert-success";
+            break;
+    }
+    <div id="toast" class="alert @alertCSSClass alert-dismissible fade @Model.ShowAlert == true? show : @string.Empty" role="alert" data-bs-delay="5000" data-bs-autohide="true">
+         <i class="fa fa-exclamation-circle me-2"></i>@Model.Message
+         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>  
+}
+

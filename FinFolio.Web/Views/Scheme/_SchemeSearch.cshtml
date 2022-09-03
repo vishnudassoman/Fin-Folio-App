@@ -2,18 +2,16 @@
 
 <div id='fundSearch' class='col-lg-12' style='padding-top:15px'>
         <ejs-autocomplete cssClass="e-bigger" id="Id" placeholder="Search Mutual Funds" minLength="3" noRecordsTemplate="@Html.Raw("<span class='norecord'> No Mututal Fund Scheme found !</span>")"  actionFailureTemplate="@Html.Raw("<span class='action-failure'> Data fetch get fails</span>")"
-        select="onSelect"
+            select="onSelect"
         >
             <e-data-manager adaptor="UrlAdaptor" url="/Scheme/Search" crossDomain="true"></e-data-manager>
-            <e-autocomplete-fields text="name" value="id"></e-autocomplete-fields>
+            <e-autocomplete-fields text="name" value="id" ></e-autocomplete-fields>
         </ejs-autocomplete>
 </div>
 
 <script type="text/javascript">
     function onSelect(args) { 
-        if ($("#schemeDetailsCollapse") != undefined) {
-           $("#schemeDetailsCollapse").trigger( "expand", [ args.itemData.id, args.itemData.name ] );
-            }
+        location.href = location.protocol + "//" + location.host + "/Scheme/SchemeDetails/" + args.itemData.id;
         } 
         
 </script>

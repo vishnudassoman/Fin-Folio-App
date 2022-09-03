@@ -18,7 +18,7 @@
     <PackageReference Include="Microsoft.Identity.Web" Version="1.16.0" />
     <PackageReference Include="Microsoft.Identity.Web.MicrosoftGraph" Version="1.16.0" />
     <PackageReference Include="Microsoft.Identity.Web.UI" Version="1.16.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.7" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.8" />
     <PackageReference Include="Syncfusion.EJ2.AspNet.Core" Version="20.2.0.40" />
   </ItemGroup>
 

@@ -29,7 +29,7 @@ namespace FinFolio.PortFolio.WebAPI.Functions
         [FunctionName("GetUserById")]
         [OpenApiOperation(operationId: "Run", tags: new[] { "name" })]
         [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]
-        [OpenApiParameter(name: "Id", In = ParameterLocation.Query, Required = true, Type = typeof(string), Description = "The **Id** parameter")]
+        [OpenApiParameter(name: "id", In = ParameterLocation.Query, Required = true, Type = typeof(string), Description = "The **Id** parameter")]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(UserDto), Description = "The UserDto object response")]
         public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req)
@@ -43,11 +43,11 @@ namespace FinFolio.PortFolio.WebAPI.Functions
             {
 
 
-                if (!int.TryParse(req.Query["Id"], out userId))
+                if (!int.TryParse(req.Query["id"], out userId))
                 {
                     string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
                     dynamic data = JsonConvert.DeserializeObject(requestBody);
-                    userId = Convert.ToInt32(data?.Id);
+                    userId = Convert.ToInt32(data?.id);
 
                 }
                 user = await _userService.GetUserAsync(userId);
