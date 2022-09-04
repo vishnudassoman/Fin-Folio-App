@@ -1,7 +1,13 @@
-﻿@using System.Globalization
+﻿
 @model FinFolio.Web.Models.SchemeViewModel
 @{
     ViewData["Title"] = $"FinFolio - {@Model.Name}";
+    OperationResultViewModel resultVM = TempData.Get<OperationResultViewModel>(Constants.ADDTOWISHLISTRESULT);
+}
+
+@if(resultVM != null)
+{
+    @await Html.PartialAsync("~/Views/Shared/_ToastAlert.cshtml", resultVM);
 }
 <div class="testimonial-item text-center">
    <h1 class="mb-1 text-info">@Model.Name</h1>
@@ -18,7 +24,17 @@
  @if(User.Identity?.IsAuthenticated == true)
         {
             <div class="testimonial-item text-center">
-            <button type="button" class="btn btn-info m-2">Add To Wishlist</button>
+                @if(resultVM == null)
+                {
+                    <form asp-controller="Wishlist" asp-action="Add" asp-antiforgery="true" method="post">
+                        <input type="hidden" asp-for="@Model.Id"/>
+                        <button type="submit" class="btn btn-info m-2">Add To Wishlist</button>
+                    </form>
+                }
+               else
+                {
+                    <a asp-controller="Wishlist" asp-action="Index">Go To Wishlist</a>
+                }
             </div> 
         }
  else
