@@ -16,50 +16,48 @@ using System.Threading.Tasks;
 
 namespace FinFolio.PortFolio.WebAPI.Functions
 {
-    public class GetUserById
+    public class GetUserByOid
     {
-        private readonly ILogger<GetUserById> _logger;
+        private readonly ILogger<GetUserByOid> _logger;
         private readonly IUserService _userService;
-        public GetUserById(ILogger<GetUserById> log, IUserService userService)
+        public GetUserByOid(ILogger<GetUserByOid> log, IUserService userService)
         {
             _logger = log;
             _userService = userService;
         }
 
-        [FunctionName("GetUserById")]
+        [FunctionName("GetUserByOid")]
         [OpenApiOperation(operationId: "Run", tags: new[] { "name" })]
         [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]
-        [OpenApiParameter(name: "id", In = ParameterLocation.Query, Required = true, Type = typeof(string), Description = "The **Id** parameter")]
-        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(UserDto), Description = "The UserDto object response")]
+        [OpenApiParameter(name: "Oid", In = ParameterLocation.Query, Required = true, Type = typeof(string), Description = "The **Object Identifier(GUID) ** parameter")]
+        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(UserDto), Description = "The UserDto response")]
         public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req)
         {
-            _logger.LogInformation("C# HTTP trigger function GetUserById - start");
+            _logger.LogInformation("C# HTTP trigger function GetUserByOid - start.");
 
-            int userId = 0;
-
+            string userId = req.Query["Oid"];
+            Guid userObjectIdentifier;
             UserDto user = null;
             try
             {
-
-
-                if (!int.TryParse(req.Query["id"], out userId))
+                if (userId == null || userId.Length == 0)
                 {
                     string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
                     UserDto userRequest = JsonConvert.DeserializeObject<UserDto>(requestBody);
-                    userId = userRequest.Id;
-
+                    userObjectIdentifier = userRequest.ObjectIdentifier;
                 }
-                user = await _userService.GetUserAsync(userId);
-
+                else
+                {
+                    userObjectIdentifier = new Guid(userId);
+                }
+                user = await _userService.GetUserAsync(userObjectIdentifier);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message, null);
             }
-
-            _logger.LogInformation("C# HTTP trigger function GetUserById - end");
-
+            _logger.LogInformation("C# HTTP trigger function GetUserByOid - end.");
             return new OkObjectResult(user);
         }
     }

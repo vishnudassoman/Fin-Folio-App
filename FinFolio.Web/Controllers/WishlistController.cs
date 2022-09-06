@@ -12,7 +12,6 @@ namespace FinFolio.Web.Controllers
     {
         private readonly ILogger<WishlistController> _logger;
         private readonly IPortfolioFunctionAdapter _portfolioFunctionAdapter;
-        int _userId = 1;
 
         public WishlistController(ILogger<WishlistController> logger, IPortfolioFunctionAdapter portfolioFunctionAdapter)
         {
@@ -23,17 +22,25 @@ namespace FinFolio.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            List<WishlistViewModel> wishlist = await this.GetWishlistByUserAsync(_userId);
             SaveAndListViewModel<WishlistViewModel> resultViewModel = new SaveAndListViewModel<WishlistViewModel>();
-            resultViewModel.ListItems = wishlist;
+            int loggedInUserId = Convert.ToInt32(User.FindFirst(CustomClaimAttributes.CLAIM_TYPE)?.Value);
+            if (loggedInUserId > 0)
+            {
+                List<WishlistViewModel> wishlist = await this.GetWishlistByUserAsync(loggedInUserId);
+                resultViewModel.ListItems = wishlist;
+            }
             return View(resultViewModel);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add(int Id, [Bind("Id")] SchemeViewModel schemeVM)
         {
-            OperationResultViewModel resultViewModel = await AddToWishListAsync(_userId, schemeVM.Id);
-            TempData.Put<OperationResultViewModel>(Constants.ADDTOWISHLISTRESULT, resultViewModel);
+            int loggedInUserId = Convert.ToInt32(User.FindFirst(CustomClaimAttributes.CLAIM_TYPE)?.Value);
+            if (loggedInUserId > 0)
+            {
+                OperationResultViewModel resultViewModel = await AddToWishListAsync(loggedInUserId, schemeVM.Id);
+                TempData.Put<OperationResultViewModel>(Constants.ADDTOWISHLISTRESULT, resultViewModel);
+            }
             return RedirectToAction("SchemeDetails", "Scheme", new { id = Id });
         }
 
