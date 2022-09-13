@@ -1,4 +1,4 @@
-name: .NET
+name: Publish FinFolio Web App
 
 on:
   workflow_dispatch:
@@ -16,7 +16,8 @@ jobs:
         dotnet-version: 6.0.x
     - name: Restore dependencies
       run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+   # - name: Build-Web-App
+     # run: dotnet build FinFolio.Web/FinFolio.Web.csproj --configuration Release --no-restore
+    - name: Publish Web App
+      run: dir #dotnet publish FinFolio.Web/FinFolio.Web.csproj --configuration Release --no-restore -o ../FinFolioWebApp -r linux-x64
+   
