@@ -4,5 +4,4 @@ This project was created for showcasing in my portfolio. Project is created usin
 # High Level Design Diagram
 
 ![HLD - FinFolio App](./HLD-FinFolioApp.png)
-<img src="./HLD-FinFolioApp.png">
 
