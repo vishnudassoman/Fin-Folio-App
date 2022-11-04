@@ -12,15 +12,7 @@
 <div class="testimonial-item text-center">
    <h1 class="mb-1 text-info">@Model.Name</h1>
    <p class="h6">@Model.AMC</p>
-   @if (@Model.NAVHistory !=null && @Model.NAVHistory.Count > 1)
-  {
-   <p class="text-white">NAV Date : @Model.NAVHistory[0].Date.ToString("dd/MM/yyyy")</p>
-        <p class="text-white">NAV : <label class="@Model.NavCSS"> @Model.NAVHistory[0].Value.ToString("C", CultureInfo.CreateSpecificCulture("en-IN")) </label></p>
-    }
-    else
-    {
-         <p class="text-danger">NAV Details not found!</p>
-    }
+   @await Html.PartialAsync("~/Views/Scheme/_SchemeNAV.cshtml",Model)
  @if(User.Identity?.IsAuthenticated == true)
         {
             <div class="testimonial-item text-center">

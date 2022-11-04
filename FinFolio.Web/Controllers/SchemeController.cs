@@ -12,7 +12,7 @@ namespace FinFolio.Web.Controllers
     {
         private readonly ILogger<SchemeController> _logger;
         private readonly IPortfolioFunctionAdapter _portfolioFunctionAdapter;
-        public SchemeController(ILogger<SchemeController> logger, IPortfolioFunctionAdapter portfolioFunctionAdapter)
+        public SchemeController(ILogger<SchemeController> logger, IPortfolioFunctionAdapter portfolioFunctionAdapter, ISchemeNavServiceAdapter schemeNavServiceAdapter)
         {
             _logger = logger;
             _portfolioFunctionAdapter = portfolioFunctionAdapter;
@@ -45,6 +45,7 @@ namespace FinFolio.Web.Controllers
             }
             return new NotFoundObjectResult(searchData);
         }
+
         #region private methods
         private async Task<List<SchemeViewModel>> GetSchemesAsync(string schemeName)
         {
@@ -86,14 +87,6 @@ namespace FinFolio.Web.Controllers
                         IsActive = result.Data.IsActive,
                         LaunchDate = result.Data.LaunchDate,
                         Name = result.Data.NAVName,
-                        NAVHistory = result.Data.NAV
-                            .Select<NavDto, SchemeNavViewModel>(navDto =>
-                            new SchemeNavViewModel
-                            {
-                                Date = navDto.Date,
-                                Value = navDto.Value
-                            })
-                        .ToList()
                     } : new SchemeViewModel();
                     return schemeVM;
                 }

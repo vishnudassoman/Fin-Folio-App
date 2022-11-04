@@ -1,0 +1,25 @@
+﻿@model FinFolio.Web.Models.SchemeViewModel
+@inject ISchemeNavServiceAdapter _schemeNavServiceAdapter;
+
+@if(Model != null )
+{
+    
+    SchemeNavViewModel schemeNAVViewModel = await _schemeNavServiceAdapter.GetSchemeNavAsync(Model.Code.ToString());
+    if (schemeNAVViewModel != null)
+    {
+        if (Convert.ToString(ViewData["origin"]) == "wishlist")
+        {
+            <label class="@schemeNAVViewModel.NavCSS"> @schemeNAVViewModel.LatestNAV.ToString("C", CultureInfo.CreateSpecificCulture("en-IN")) </label>
+        }
+        else
+        {
+            <p class="text-white">NAV Date : @schemeNAVViewModel.Date.ToString("dd/MM/yyyy")</p>
+            <p class="text-white">NAV : <label class="@schemeNAVViewModel.NavCSS"> @schemeNAVViewModel.LatestNAV.ToString("C", CultureInfo.CreateSpecificCulture("en-IN")) </label></p>
+        }
+    }
+    else
+    {
+        <p class="text-danger">NAV Details not found!</p>
+    }
+  
+}

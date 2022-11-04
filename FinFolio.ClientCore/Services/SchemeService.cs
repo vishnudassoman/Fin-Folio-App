@@ -1,10 +1,8 @@
 ﻿using FinFolio.PortFolio.DTO;
-using FinFolio.PortFolioCore.ExternalModels;
 using FinFolio.PortFolioCore.Interfaces;
 using FinFolio.PortFolioRepository.Entities;
 using FinFolio.PortFolioRepository.Interfaces;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 
 namespace FinFolio.PortFolioCore.Services
 {
@@ -46,42 +44,7 @@ namespace FinFolio.PortFolioCore.Services
                     IsActive = schemeDetails.IsActive,
                     LaunchDate = schemeDetails.LaunchDate,
                     NAVName = schemeDetails.NAVName,
-                    NAV = await this.GetSchemeNAVAsync(schemeDetails.Code)
                 };
-            }
-            return null;
-        }
-
-        private async Task<List<NavDto>> GetSchemeNAVAsync(long code)
-        {
-            try
-            {
-                HttpClient client = new HttpClient();
-                using (client)
-                {
-                    HttpResponseMessage responseMessage = await client.GetAsync($"https://api.mfapi.in/mf/{code.ToString()}");
-                    if (responseMessage != null && responseMessage.IsSuccessStatusCode)
-                    {
-
-                        string serialized = await responseMessage.Content.ReadAsStringAsync();
-                        MfApiData navData = JsonConvert.DeserializeObject<MfApiData>(serialized);
-                        if (navData != null && navData.status == "SUCCESS")
-                        {
-                            return navData.data.Select<Nav, NavDto>(nav =>
-                                 new NavDto
-                                 {
-                                     Date = DateTime.Parse(nav.date, null, System.Globalization.DateTimeStyles.AssumeLocal),
-                                     Value = Convert.ToDecimal(nav.nav),
-                                 }
-                                 ).ToList();
-                        }
-                    }
-                }
-
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error while getting NAV values", code);
             }
             return null;
         }

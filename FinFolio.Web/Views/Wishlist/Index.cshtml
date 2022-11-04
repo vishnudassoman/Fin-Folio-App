@@ -3,21 +3,28 @@
 @{
     ViewData["Title"] = "Wishlist";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["origin"] = "wishlist";
 }
 
 <h1 class="text-danger text-center">Wishlist</h1>
-    <div class="control-section">
-        <ejs-grid id="Grid" dataSource="@Model.ListItems" allowPaging="true">
-            <e-grid-pagesettings pageCount="5"></e-grid-pagesettings>
-            <e-grid-columns>
-                <e-grid-column field="Id" headerText="Wishlist Item ID" textAlign="Left" visible=false width="120"></e-grid-column>
-                <e-grid-column field="UserID" headerText="User ID" visible=false width="150"></e-grid-column>
-                <e-grid-column field="Code" headerText=" Scheme Code" textAlign="Right" visible=false width="130"></e-grid-column>
-                <e-grid-column field="NAVName" headerText="Scheme Name" textAlign="Left" width="120"></e-grid-column>
-                <e-grid-column field="NAV" format="N2" headerText="NAV" format="Right" width="150"></e-grid-column>
-            </e-grid-columns>
-
-        </ejs-grid>
+<div class="bg-secondary rounded h-100 p-4">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Scheme Name</th>
+                    <th scope="col">NAV</th>
+                </tr>
+            </thead>
+            <tbody>
+                    @foreach (WishlistViewModel item in Model.ListItems)
+                    {
+                        <tr>
+                        <td class="text-white">@item.NAVName</td>
+                        <td class="text-white">@await Html.PartialAsync("~/Views/Scheme/_SchemeNAV.cshtml",new SchemeViewModel{Code=item.Code}, ViewData)</td>
+                        </tr>
+                    }
+            </tbody>
+        </table>
+    </div>
 </div>
-
-

@@ -10,6 +10,8 @@ using System.Security.Claims;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<IPortfolioFunctionAdapter, PortfolioFunctionAdapter>();
+builder.Services.AddScoped<ISchemeNavServiceAdapter, SchemeNavServiceAdapter>();
+
 builder.Services.AddScoped<IUserService, UserService>();
 // Add services to the container.
 builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)

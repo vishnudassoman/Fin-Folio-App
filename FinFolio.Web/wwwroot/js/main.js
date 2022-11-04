@@ -66,7 +66,7 @@
 
 
     // Worldwide Sales Chart
-    var ctx1 = $("#worldwide-sales").get(0).getContext("2d");
+   /* var ctx1 = $("#worldwide-sales").get(0).getContext("2d");
     var myChart1 = new Chart(ctx1, {
         type: "bar",
         data: {
@@ -91,11 +91,11 @@
         options: {
             responsive: true
         }
-    });
+    });*/
 
 
     // Salse & Revenue Chart
-    var ctx2 = $("#salse-revenue").get(0).getContext("2d");
+    /*var ctx2 = $("#salse-revenue").get(0).getContext("2d");
     var myChart2 = new Chart(ctx2, {
         type: "line",
         data: {
@@ -118,11 +118,11 @@
             responsive: true
         }
     });
-    
+    */
 
 
     // Single Line Chart
-    var ctx3 = $("#line-chart").get(0).getContext("2d");
+   /* var ctx3 = $("#line-chart").get(0).getContext("2d");
     var myChart3 = new Chart(ctx3, {
         type: "line",
         data: {
@@ -138,10 +138,10 @@
             responsive: true
         }
     });
-
+    */
 
     // Single Bar Chart
-    var ctx4 = $("#bar-chart").get(0).getContext("2d");
+  /*  var ctx4 = $("#bar-chart").get(0).getContext("2d");
     var myChart4 = new Chart(ctx4, {
         type: "bar",
         data: {
@@ -162,9 +162,9 @@
         }
     });
 
-
+*/
     // Pie Chart
-    var ctx5 = $("#pie-chart").get(0).getContext("2d");
+ /*   var ctx5 = $("#pie-chart").get(0).getContext("2d");
     var myChart5 = new Chart(ctx5, {
         type: "pie",
         data: {
@@ -184,10 +184,10 @@
             responsive: true
         }
     });
-
+    */
 
     // Doughnut Chart
-    var ctx6 = $("#doughnut-chart").get(0).getContext("2d");
+  /*  var ctx6 = $("#doughnut-chart").get(0).getContext("2d");
     var myChart6 = new Chart(ctx6, {
         type: "doughnut",
         data: {
@@ -206,8 +206,11 @@
         options: {
             responsive: true
         }
-    });
+    });*/
 
     
 })(jQuery);
+$(document).ready(function () {
+    $('a[href="' + location.pathname + '"]').addClass("active");
+});
 
