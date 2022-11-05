@@ -1,4 +1,4 @@
-name: .NET
+name: Build WebAPI projects on push.
 
 on:
   push:
