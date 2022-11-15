@@ -24,6 +24,7 @@ namespace FinFolio.PortFolio.WebAPI
             options.UseSqlServer(_configuration.GetConnectionString("PortFolioDBConnection")
             )
             );
+            builder.Services.AddApplicationInsightsTelemetry();
             //Repository Dependency
             builder.Services.AddScoped<IWishlistRepository, WishlistRepository>();
             builder.Services.AddScoped<ISchemeRepository, SchemeRepository>();

@@ -27,9 +27,10 @@ namespace FinFolio.PortFolio.WebAPI.Functions
         }
 
         [FunctionName("GetSchemeDetails")]
-        [OpenApiOperation(operationId: "Run", tags: new[] { "name" })]
+        [OpenApiOperation(operationId: "Run", tags: new[] { "Schemes" })]
         [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]
-        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(SchemeDto), Description = "The OK response")]
+        [OpenApiRequestBody(contentType: "application/json", bodyType: typeof(SchemeDto), Description = "A SchemeDto object instance with Scheme Id as the value of Id property", Example = typeof(SchemeDto), Required = true)]
+        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(SchemeDto), Description = "Returns the Scheme details as SchemeDto for the given scheme id")]
         public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] HttpRequest req)
         {

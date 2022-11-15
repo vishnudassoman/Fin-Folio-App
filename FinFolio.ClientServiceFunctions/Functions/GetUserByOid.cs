@@ -27,10 +27,11 @@ namespace FinFolio.PortFolio.WebAPI.Functions
         }
 
         [FunctionName("GetUserByOid")]
-        [OpenApiOperation(operationId: "Run", tags: new[] { "name" })]
+        [OpenApiOperation(operationId: "Run", tags: new[] { "User" })]
         [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]
         [OpenApiParameter(name: "Oid", In = ParameterLocation.Query, Required = true, Type = typeof(string), Description = "The **Object Identifier(GUID) ** parameter")]
-        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(UserDto), Description = "The UserDto response")]
+        [OpenApiRequestBody(contentType: "application/json", bodyType: typeof(UserDto), Description = "A UserDto object instance with value in Object Identifier property", Example = typeof(UserDto), Required = true)]
+        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(UserDto), Description = "Returns the user details as UserDto for the given object identifier of the user")]
         public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req)
         {

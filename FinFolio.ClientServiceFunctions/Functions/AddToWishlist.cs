@@ -29,9 +29,10 @@ namespace FinFolio.PortFolio.WebAPI.Functions
         }
 
         [FunctionName("AddToWishlist")]
-        [OpenApiOperation(operationId: "Run", tags: new[] { "name" })]
+        [OpenApiOperation(operationId: "Run", tags: new[] { "Wishlist" })]
         [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]
-        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(WishlistDto), Description = "The OK response")]
+        [OpenApiRequestBody(contentType: "application/json", bodyType: typeof(WishlistDto), Description = "A WishlistDto object instance with UserId and SchemeDto.Id", Example = typeof(WishlistDto), Required = true)]
+        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(WishlistDto), Description = "Adds the scheme to the user's wishlist and returns the added item as wishlistdto")]
         public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] HttpRequest req)
         {

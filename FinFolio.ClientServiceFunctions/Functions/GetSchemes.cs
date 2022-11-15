@@ -29,9 +29,10 @@ namespace FinFolio.PortFolio.WebAPI.Functions
         }
 
         [FunctionName("GetSchemes")]
-        [OpenApiOperation(operationId: "Run", tags: new[] { "schemename" })]
+        [OpenApiOperation(operationId: "Run", tags: new[] { "Schemes" })]
         [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]
-        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(List<SchemeDto>), Description = "The OK response")]
+        [OpenApiRequestBody(contentType: "application/json", bodyType: typeof(SchemeRequestDto), Description = "A SchemeRequestDto object instance with value in NAVName property", Example = typeof(SchemeRequestDto), Required = true)]
+        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(List<SchemeDto>), Description = "Returns a list of Schemes (List<SchemeDto>) with the NAV Name passed as the input parameter in the request.")]
         public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] HttpRequest req)
         {

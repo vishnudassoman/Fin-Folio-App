@@ -28,10 +28,11 @@ namespace FinFolio.PortFolio.WebAPI.Functions
         }
 
         [FunctionName("GetWishListByUser")]
-        [OpenApiOperation(operationId: "Run", tags: new[] { "name" })]
+        [OpenApiOperation(operationId: "Run", tags: new[] { "Wishlist" })]
         [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]
         [OpenApiParameter(name: "userid", In = ParameterLocation.Query, Required = true, Type = typeof(string), Description = "The id of the user")]
-        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(System.Collections.Generic.List<WishlistDto>), Description = "The OK response")]
+        [OpenApiRequestBody(contentType: "application/json", bodyType: typeof(UserDto), Description = "A UserDto object instance with value in Id property", Example = typeof(UserDto), Required = true)]
+        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(System.Collections.Generic.List<WishlistDto>), Description = "Returns the wishlist for the given userid as a list of WishlistDto")]
         public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req)
         {
