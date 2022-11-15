@@ -49,7 +49,7 @@ builder.Services.AddAuthorization(options =>
 
 
 
-builder.Services.AddApplicationInsightsTelemetry();
+//builder.Services.AddApplicationInsightsTelemetry();
 
 builder.Services.AddControllersWithViews(options =>
 {
