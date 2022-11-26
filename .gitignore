@@ -364,3 +364,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /FinFolio.Web/Properties/ServiceDependencies/finfolio - Web Deploy/profile.arm.json
+/Bicep Files
+/FinFolio.ClientServiceFunctions/Functions/AddWishlistEventToEventGrid.cs
