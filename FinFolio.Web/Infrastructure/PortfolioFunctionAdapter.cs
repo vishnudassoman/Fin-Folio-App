@@ -22,6 +22,7 @@ namespace FinFolio.Web.Infrastructure
             {
                 HttpClient client = new HttpClient();
                 client.DefaultRequestHeaders.Add("x-functions-key", _configuration.GetValue("PortFolioWebApi:FunctionKey", string.Empty));
+                client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", _configuration.GetValue("PortFolioWebApi:ApimSubscriptionKey", string.Empty));
 
                 string url = $"{_configuration.GetValue("PortFolioWebApi:FunctionBaseUrl", string.Empty)}/{functionName}";
                 var content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
