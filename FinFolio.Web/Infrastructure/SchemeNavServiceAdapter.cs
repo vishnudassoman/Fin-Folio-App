@@ -1,6 +1,7 @@
 ﻿using FinFolio.Web.Infrastructure.Models;
 using FinFolio.Web.Models;
 using Newtonsoft.Json;
+using System.Globalization;
 
 namespace FinFolio.Web.Infrastructure
 {
@@ -26,7 +27,7 @@ namespace FinFolio.Web.Infrastructure
                         if (navData != null && navData.status == "SUCCESS" && navData.data != null && navData.data.Count > 0)
                         {
                             SchemeNavViewModel navViewModel = new SchemeNavViewModel();
-                            navViewModel.Date = DateTime.Parse(navData.data[0].date, null, System.Globalization.DateTimeStyles.None);
+                            navViewModel.Date = DateTime.ParseExact(navData.data[0].date, "dd-MM-yyyy", CultureInfo.InvariantCulture);
                             navViewModel.LatestNAV = Convert.ToDecimal(navData.data[0].nav);
                             if (navData.data.Count > 1)
                             {
