@@ -1,8 +1,7 @@
 {
   "profiles": {
     "FinFolio.PortFolio.WebAPI": {
-      "commandName": "Project",
-      "commandLineArgs": "--verbose"
+      "commandName": "Project"
     }
   }
 }
